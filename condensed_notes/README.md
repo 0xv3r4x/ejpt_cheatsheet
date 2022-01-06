@@ -2,8 +2,6 @@
 
 These are my condensed notes to help you on the eJPT exam.  The layout of this document follows a logical order from enumeration to exploitation.  Steps should be repeated where necessary.
 
-[[__TOC__]]
-
 ## Common Ports
 
 ### TCP
