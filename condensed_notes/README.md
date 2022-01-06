@@ -503,7 +503,7 @@ $ which python
 $ python -c "import pty; pty.spawn('/bin/bash')"
 
 # Finally, export XTERM (allows you to clear terminal)
-$ export TERM-xterm
+$ export TERM=xterm
 ```
 
 ## Bruteforcing
