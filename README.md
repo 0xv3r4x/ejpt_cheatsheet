@@ -8,7 +8,7 @@ This repository holds my notes for the eLearnSecurity Junior Penetration Tester 
 
 For effective notetaking, I would highly recommend [Obsidian](https://obsidian.md/).  I have only started to use this recently and it has completely changed the way I write notes and ridiculously increased my productivity.
 
-The notes that follow do not contain details about the labs or the exam for obvious reasons.  Also note that INE update their courses frequently so some of this information may be outdated.  I will do my best to update them, but I'm not planning on doing a complete overhaul should the course be significantly.
+The notes that follow do not contain details about the labs or the exam for obvious reasons.  Also note that INE update their courses frequently so some of this information may be outdated.  I will do my best to update them, but I'm not planning on doing a complete overhaul should the course be changed significantly.
 
 **Date last updated**: 6th January 2021
 

